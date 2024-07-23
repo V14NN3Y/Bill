@@ -1,0 +1,8 @@
+name: date
+run-name: the_date_of_push
+on: [push]
+jobs:
+  what time is it:
+    runs-on: ubuntu-latest
+    steps:
+      - run: date
