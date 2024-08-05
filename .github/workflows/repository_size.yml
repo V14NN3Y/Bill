@@ -1,8 +1,9 @@
 name: Chocolatine
 run-name: check_the_push_or_the_pull
-on: [push]
-  branches-ignore:
-    - 'ga-ignore-*'
+on:
+  push:
+    branches-ignore:
+      - 'ga-ignore-*'
 jobs:
   coding_style_checker:
     name: check_coding_style
