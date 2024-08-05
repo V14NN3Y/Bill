@@ -1,6 +1,6 @@
 name: Chocolatine
 run-name: check_the_push_or_the_pull
-on: [push, pull_request]
+on: [push]
   branches-ignore:
     - 'ga-ignore-*'
 jobs:
