@@ -1,0 +1,12 @@
+name: Chocolatine
+run-name: check_the_push_or_the_pull
+on: [push, pull_request]
+  branches-ignore:
+    - 'ga-ignore-*'
+jobs:
+  coding_style_checker:
+    name: check_coding_style
+    runs-on: ghcr.io/epitech/coding-style-checker:latest
+    steps:
+      - run: coding-style . .
+      - run: cat coding-style-reports.log
