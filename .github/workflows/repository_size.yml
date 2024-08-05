@@ -14,4 +14,4 @@ jobs:
     container: ghcr.io/epitech/coding-style-checker:latest
     steps:
       - uses: actions/checkout@v4
-      - run: coding-style . .
+      - run: check.sh . .
