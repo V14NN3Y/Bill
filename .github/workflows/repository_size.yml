@@ -1,19 +1,35 @@
-name: Chocolatine
-run-name: check_if_the_push_or_the_pull_is_good
-on:
-  push:
-    branches-ignore:
-      - 'ga-ignore-*'
-  pull_request:
-    branches-ignore:
-      - 'ga-ignore-*'
+name: Check Coding Style
+
+on: [push, pull_request]
+
 jobs:
   check_coding_style:
-    name: check_coding_style
     runs-on: ubuntu-latest
-    container: ghcr.io/epitech/coding-style-checker:latest
+
     steps:
-      - uses: actions/checkout@v4
-      - run: |
-          check.sh . .
-          ls
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
+      - name: Run coding style checker
+        uses: docker://ghcr.io/epitech/coding-style-checker:latest
+        id: coding_style_checker
+        with:
+          args: check.sh $(pwd) $(pwd)
+
+      - name: Parse and report coding style errors
+        run: |
+          if [ -f coding-style-reports.log ]; then
+            cat coding-style-reports.log
+            grep -E '^ERROR' coding-style-reports.log | while read -r line; do
+              error_message=$(echo "$line" | sed -E 's/^ERROR: //')
+              echo "::error ::$error_message"
+            done
+            if grep -q '^ERROR' coding-style-reports.log; then
+              exit 1
+            fi
+          else
+            echo "No coding style report found."
+          fi
