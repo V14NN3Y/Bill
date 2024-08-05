@@ -16,4 +16,4 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           check.sh . .
-          cat coding-style-reports.log
+          tree ..
