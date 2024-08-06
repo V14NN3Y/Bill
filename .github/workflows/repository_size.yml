@@ -19,3 +19,31 @@ jobs:
           if [ -f coding-style-reports.log ]; then
             cat coding-style-reports.log
           fi
+
+  check_program_compilation:
+    name: check_program_compilation
+    runs-on: ubuntu-latest
+    container: epitechcontent/epitest-docker
+    env:
+      EXECUTABLES: "104neutrinos"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Compilation
+        run: make
+        timeout-minutes: 2
+      - name: Cleaner
+        run: make clean
+      - name: Check file exist
+        run: |
+          if [ -f 104neutrinos ]; then
+            if [ -x 104neutrinos ]; then
+              echo "Le fichier existe et est exécutable."
+            else
+              echo "Le fichier existe mais n'est pas exécutable."
+              exit 1
+            fi
+          else
+            echo "Le fichier n'existe pas."
+            exit 1
+          fi
