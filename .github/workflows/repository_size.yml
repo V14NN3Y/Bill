@@ -39,14 +39,10 @@ jobs:
       - name: Check file exist
         run: |
           if [ -f 104neutrinos ]; then
-            if [ -x 104neutrinos ]; then
-              echo "Le fichier existe et est exécutable."
-            else
-              echo "Le fichier existe mais n'est pas exécutable."
+            if [ ! -x 104neutrinos ]; then
               exit 1
             fi
           else
-            echo "Le fichier n'existe pas."
             exit 1
           fi
 
@@ -61,7 +57,5 @@ jobs:
         run: |
           if make -q tests-run; then
             make tests-run
-          else
-            echo "La règle 'tests-run' n'existe pas dans le Makefile, skipping tests."
           fi
         timeout-minutes: 2
