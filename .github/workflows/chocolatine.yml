@@ -20,10 +20,12 @@ jobs:
             while IFS= read -r line; do
               echo "::error file=${{github.workspace}}/${line#* }::${line}"
             done < coding-style-reports.log
+            exit(1)
           fi
 
   check_program_compilation:
     name: check_program_compilation
+    needs: check_coding_style
     runs-on: ubuntu-latest
     container: epitechcontent/epitest-docker
     env:
@@ -48,6 +50,7 @@ jobs:
 
   run_tests:
     name: run_tests
+    needs: check_program_compilation
     runs-on: ubuntu-latest
     container: epitechcontent/epitest-docker
     steps:
