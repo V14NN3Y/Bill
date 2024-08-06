@@ -47,3 +47,14 @@ jobs:
             echo "Le fichier n'existe pas."
             exit 1
           fi
+
+  run_tests:
+    name: run_tests
+    runs-on: ubuntu-latest
+    container: epitechcontent/epitest-docker
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Compilation
+        run: make tests_run
+        timeout-minutes: 2
