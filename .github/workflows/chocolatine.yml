@@ -20,7 +20,7 @@ jobs:
             while IFS= read -r line; do
               echo "::error file=${{github.workspace}}/${line#* }::${line}"
             done < coding-style-reports.log
-            exit(1)
+            exit 1
           fi
 
   check_program_compilation:
