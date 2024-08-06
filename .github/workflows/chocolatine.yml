@@ -26,3 +26,41 @@ jobs:
             done < coding-style-reports.log
             # exit 1
           fi
+
+  check_program_compilation:
+    name: check_program_compilation
+    needs: check_coding_style
+    runs-on: ubuntu-latest
+    container: epitechcontent/epitest-docker
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Compilation
+        run: make
+        timeout-minutes: 2
+      - name: Cleaner
+        run: make clean
+      - name: Check file exist
+        run: |
+          if [ -f 104neutrinos ]; then
+            if [ ! -x 104neutrinos ]; then
+              exit 1
+            fi
+          else
+            exit 1
+          fi
+
+  run_tests:
+    name: run_tests
+    needs: check_program_compilation
+    runs-on: ubuntu-latest
+    container: epitechcontent/epitest-docker
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Compilation
+        run: |
+          if make -q tests-run; then
+            make tests-run
+          fi
+        timeout-minutes: 2
