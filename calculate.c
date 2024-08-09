@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** calculate.c
+** calculate.c 
 ** File description:
 ** all the function we used for calculation
 */
