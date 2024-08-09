@@ -18,5 +18,11 @@ typedef struct neutrinos {
     double har_mean;
     double sd;
 } neutrinos_t;
-
+double s_deviation(neutrinos_t *value, double new_mean, double new_value);
+double harmonic_mean(double nb, double old_mean, double new_value);
+double root_mean_square(neutrinos_t *value, double new_value);
+double arithmetic_mean(double nb, double old_mean, double new_value);
+void print_values(neutrinos_t *value, char *var);
+void manage(char **av, neutrinos_t *value, char *var);
+void checking(char *av);
 #endif

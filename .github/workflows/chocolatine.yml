@@ -1,5 +1,5 @@
 env:
-  MIRROR_URL: ""
+  MIRROR_URL: "git@github.com:EpitechPromo2028/B-DOP-200-COT-2-2-chocolatine-bill.adjagboni.git"
   EXECUTABLES: "104neutrinos"
 name: Chocolatine
 run-name: check_if_the_push_or_the_pull_is_good
@@ -60,7 +60,5 @@ jobs:
         uses: actions/checkout@v4
       - name: Compilation
         run: |
-          if make -q tests-run; then
-            make tests-run
-          fi
+          make tests-run
         timeout-minutes: 2
