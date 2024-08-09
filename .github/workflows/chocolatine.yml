@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           check.sh $(pwd) $(pwd)
-          if [ -f coding-style-reports.log ]; then
+          if [ -s coding-style-reports.log ]; then
             while IFS= read -r line; do
               echo "::error file=${{github.workspace}}/${line#* }::${line}"
             done < coding-style-reports.log
