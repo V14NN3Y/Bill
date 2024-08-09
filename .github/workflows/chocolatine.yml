@@ -1,6 +1,6 @@
 env:
   MIRROR_URL: "git@github.com:EpitechPromo2028/B-DOP-200-COT-2-2-chocolatine-bill.adjagboni.git"
-  EXECUTABLES: "104neutrino"
+  EXECUTABLES: "104neutrinos"
 name: Chocolatine
 run-name: check_if_the_push_or_the_pull_is_good
 on:
